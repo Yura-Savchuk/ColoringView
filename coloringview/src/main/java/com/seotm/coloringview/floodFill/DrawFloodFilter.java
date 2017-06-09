@@ -12,17 +12,19 @@ import com.seotm.coloringview.draws.Position;
 
 public class DrawFloodFilter {
 
+    private static final int TOLERANCE = 200;
+
     private final Position position;
 
     public DrawFloodFilter(@NonNull Position position) {
         this.position = position;
     }
 
-    public void draw(int newColor, Bitmap bitmap) {
+    public void draw(int newColor, @NonNull Bitmap bitmap) {
         if (!position.valid) return;
         int targetColor = getTargetColor(bitmap);
         QueueLinearFloodFiller floodFiller = new QueueLinearFloodFiller(bitmap, targetColor, newColor);
-        floodFiller.setTolerance(10);
+        floodFiller.setTolerance(TOLERANCE);
         floodFiller.floodFill(position.x, position.y);
     }
 
