@@ -3,6 +3,7 @@ package com.seotm.coloringview.floodFill;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.seotm.coloringview.draws.Position;
 
@@ -20,8 +21,8 @@ public class DrawFloodFilter {
         this.position = position;
     }
 
-    public void draw(int newColor, @NonNull Bitmap bitmap) {
-        if (!position.valid) return;
+    public void draw(int newColor, @Nullable Bitmap bitmap) {
+        if (!position.valid || bitmap == null) return;
         int targetColor = getTargetColor(bitmap);
         QueueLinearFloodFiller floodFiller = new QueueLinearFloodFiller(bitmap, targetColor, newColor);
         floodFiller.setTolerance(TOLERANCE);

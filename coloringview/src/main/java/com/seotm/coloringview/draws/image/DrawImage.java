@@ -14,8 +14,11 @@ import com.seotm.coloringview.draws.Position;
 public interface DrawImage extends DrawComponent {
 
     void setImage(@Nullable Drawable image);
+    void setImage(@Nullable Bitmap image);
+
     @Nullable
     Bitmap getImage();
+
     Position toBitmapPosition(int x, int y);
 
 }

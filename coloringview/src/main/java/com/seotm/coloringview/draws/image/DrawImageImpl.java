@@ -16,9 +16,9 @@ import com.seotm.coloringview.draws.ViewSize;
 
 public class DrawImageImpl implements DrawImage {
 
-    private Drawable drawableImg;
-    private Bitmap bitmapImg;
-    private Rect bounds;
+    Drawable drawableImg;
+    Bitmap bitmapImg;
+    Rect bounds;
     private final ViewSize viewSize = new ViewSize();
 
     @Override
@@ -28,14 +28,15 @@ public class DrawImageImpl implements DrawImage {
     }
 
     private void setupImageBounds() {
-        if (drawableImg == null) return;
-        if (!viewSize.isEstablished()) {
-            drawableImg.setBounds(0, 0, 0, 0);
-            return;
-        }
-        bounds = ImageBoundsCreator.create(drawableImg, viewSize.getWidth(), viewSize.getHeight());
-        DrawableToBitmap drawableToBitmap = new DrawableToBitmap(drawableImg);
-        bitmapImg = drawableToBitmap.convertToBitmap(bounds);
+        SetupImageBounds setupBounds = new SetupImageBounds(this);
+        setupBounds.setupImageBounds(viewSize);
+    }
+
+    @Override
+    public void setImage(@Nullable Bitmap image) {
+        this.bitmapImg = image;
+        drawableImg = null;
+        setupImageBounds();
     }
 
     @Nullable

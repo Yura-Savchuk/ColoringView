@@ -1,6 +1,7 @@
 package com.seotm.coloringview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -39,6 +40,14 @@ public class ColoringView extends View {
         drawImage.setImage(image);
     }
 
+    public void setImageBitmap(@Nullable Bitmap bitmap) {
+        drawImage.setImage(bitmap);
+    }
+
+    public Bitmap getImageBitmap() {
+        return drawImage.getImage();
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -58,8 +67,8 @@ public class ColoringView extends View {
             int x = (int) event.getX();
             int y = (int) event.getY();
             Position bitmapPosition = drawImage.toBitmapPosition(x, y);
-            new DrawFloodFilter(bitmapPosition)
-                    .draw(Color.RED, drawImage.getImage());
+            Bitmap image = drawImage.getImage();
+            new DrawFloodFilter(bitmapPosition).draw(Color.RED, image);
             invalidate();
         }
         return true;
