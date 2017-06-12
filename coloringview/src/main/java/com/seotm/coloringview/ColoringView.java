@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -22,6 +23,7 @@ import com.seotm.coloringview.floodFill.DrawFloodFilter;
 public class ColoringView extends View {
 
     final DrawImage drawImage;
+    int paintColor;
 
     public ColoringView(Context context) {
         this(context, null);
@@ -39,6 +41,10 @@ public class ColoringView extends View {
 
     public void setImage(@Nullable Drawable image) {
         drawImage.setImage(image);
+    }
+
+    public void setPaintColor(@ColorInt int paintColor) {
+        this.paintColor = paintColor;
     }
 
     public void setState(@Nullable ColoringState state) {
@@ -71,7 +77,7 @@ public class ColoringView extends View {
             int y = (int) event.getY();
             Position bitmapPosition = drawImage.toBitmapPosition(x, y);
             Bitmap image = drawImage.getImage();
-            new DrawFloodFilter(bitmapPosition).draw(Color.RED, image);
+            new DrawFloodFilter(bitmapPosition).draw(paintColor, image);
             invalidate();
         }
         return true;

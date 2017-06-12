@@ -3,6 +3,7 @@
 
     <declare-styleable name="ColoringView">
         <attr name="imageSrc" format="reference" />
+        <attr name="paintColor" format="color" />
     </declare-styleable>
 
 </resources>
