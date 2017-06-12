@@ -15,3 +15,8 @@ This is just view with flood fill ability. You can set image from drawable resou
         app:paintColor="#3F51B5"
         />
 ```
+# Add ColoringView to your project
+Gradle:
+``` java
+compile 'com.seotm.coloringview:coloringview:1.0'
+ ```
