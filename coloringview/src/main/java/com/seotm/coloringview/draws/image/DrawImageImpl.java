@@ -33,7 +33,7 @@ public class DrawImageImpl implements DrawImage {
     }
 
     @Override
-    public void setImage(@Nullable Bitmap image) {
+    public void setImage(@NonNull Bitmap image) {
         this.bitmapImg = image;
         drawableImg = null;
         setupImageBounds();

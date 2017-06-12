@@ -1,6 +1,5 @@
 package com.seotm.coloring;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.seotm.coloringview.ColoringState;
 import com.seotm.coloringview.ColoringView;
 
 /**
@@ -19,7 +19,7 @@ import com.seotm.coloringview.ColoringView;
 public class ColoringFragment extends Fragment {
 
     private ColoringView coloringView;
-    private Bitmap coloringImage;
+    private ColoringState coloringState;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,17 +41,14 @@ public class ColoringFragment extends Fragment {
 
     private void setupColoringView(View view) {
         coloringView = (ColoringView) view.findViewById(R.id.coloringView);
-        if (coloringImage != null) {
-            coloringView.setImageBitmap(coloringImage);
-            return;
-        }
         Drawable image = ContextCompat.getDrawable(getContext(), R.drawable.girls);
         coloringView.setImage(image);
+        coloringView.setState(coloringState);
     }
 
     @Override
     public void onDestroyView() {
-        coloringImage = coloringView.getImageBitmap();
+        coloringState = coloringView.getState();
         super.onDestroyView();
     }
 

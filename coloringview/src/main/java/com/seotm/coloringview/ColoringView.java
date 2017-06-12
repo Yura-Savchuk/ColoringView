@@ -21,7 +21,7 @@ import com.seotm.coloringview.floodFill.DrawFloodFilter;
 
 public class ColoringView extends View {
 
-    private final DrawImage drawImage;
+    final DrawImage drawImage;
 
     public ColoringView(Context context) {
         this(context, null);
@@ -40,12 +40,14 @@ public class ColoringView extends View {
         drawImage.setImage(image);
     }
 
-    public void setImageBitmap(@Nullable Bitmap bitmap) {
-        drawImage.setImage(bitmap);
+    public void setState(@Nullable ColoringState state) {
+        if (state != null) {
+            state.restoreState(this);
+        }
     }
 
-    public Bitmap getImageBitmap() {
-        return drawImage.getImage();
+    public ColoringState getState() {
+        return new ColoringState(this);
     }
 
     @Override
