@@ -17,7 +17,7 @@ public class ColoringState {
 
     void restoreState(@NonNull ColoringView view) {
         if (bitmap != null) {
-            view.drawImage.setImage(bitmap);
+            view.drawImage.setStateImage(bitmap);
         }
     }
 }

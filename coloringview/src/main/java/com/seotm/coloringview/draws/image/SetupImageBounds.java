@@ -31,16 +31,18 @@ class SetupImageBounds {
         }
         drawImage.bounds = ImageBoundsCreator.create(drawImage.drawableImg, viewSize.getWidth(), viewSize.getHeight());
         DrawableToBitmap drawableToBitmap = new DrawableToBitmap(drawImage.drawableImg);
-        drawImage.bitmapImg = drawableToBitmap.convertToBitmap(drawImage.bounds);
+        Bitmap bitmap = drawableToBitmap.convertToBitmap(drawImage.bounds);
+        drawImage.bitmapImg = new BitmapHolder(bitmap, false);
         return true;
     }
 
     private void setupBoundsFromBitmap(@NonNull ViewSize viewSize) {
         if (drawImage.bitmapImg == null || !viewSize.isEstablished()) return;
-        drawImage.bounds = ImageBoundsCreator.create(drawImage.bitmapImg, viewSize.getWidth(), viewSize.getHeight());
-        Bitmap bitmap = Bitmap.createScaledBitmap(drawImage.bitmapImg, drawImage.bounds.width(), drawImage.bounds.height(), false);
-        drawImage.bitmapImg.recycle();
-        drawImage.bitmapImg = bitmap;
+        Bitmap oldBitmap = drawImage.bitmapImg.bitmap;
+        drawImage.bounds = ImageBoundsCreator.create(oldBitmap, viewSize.getWidth(), viewSize.getHeight());
+        Bitmap bitmap = Bitmap.createScaledBitmap(oldBitmap, drawImage.bounds.width(), drawImage.bounds.height(), drawImage.bitmapImg.allowGrown);
+        oldBitmap.recycle();
+        drawImage.bitmapImg = new BitmapHolder(bitmap, false);
     }
 
 }

@@ -17,7 +17,7 @@ import com.seotm.coloringview.draws.ViewSize;
 public class DrawImageImpl implements DrawImage {
 
     Drawable drawableImg;
-    Bitmap bitmapImg;
+    BitmapHolder bitmapImg;
     Rect bounds;
     private final ViewSize viewSize = new ViewSize();
 
@@ -33,8 +33,21 @@ public class DrawImageImpl implements DrawImage {
     }
 
     @Override
-    public void setImage(@NonNull Bitmap image) {
-        this.bitmapImg = image;
+    public void setImage(@Nullable Bitmap image) {
+        this.bitmapImg = null;
+        if (image != null) {
+            this.bitmapImg = new BitmapHolder(image, false);
+        }
+        drawableImg = null;
+        setupImageBounds();
+    }
+
+    @Override
+    public void setStateImage(@Nullable Bitmap image) {
+        this.bitmapImg = null;
+        if (image != null) {
+            this.bitmapImg = new BitmapHolder(image, true);
+        }
         drawableImg = null;
         setupImageBounds();
     }
@@ -42,7 +55,10 @@ public class DrawImageImpl implements DrawImage {
     @Nullable
     @Override
     public Bitmap getImage() {
-        return bitmapImg;
+        if (bitmapImg != null) {
+            return bitmapImg.bitmap;
+        }
+        return null;
     }
 
     @Override
@@ -66,9 +82,10 @@ public class DrawImageImpl implements DrawImage {
 
     @Override
     public void draw(@NonNull Canvas canvas) {
-        if (bitmapImg != null && bounds != null) {
-            canvas.drawBitmap(bitmapImg, bounds.left, bounds.top, null);
+        if (bitmapImg == null || bounds == null) {
+            return;
         }
+        canvas.drawBitmap(bitmapImg.bitmap, bounds.left, bounds.top, null);
     }
 
 }

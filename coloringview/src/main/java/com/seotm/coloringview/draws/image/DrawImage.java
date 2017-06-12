@@ -2,7 +2,6 @@ package com.seotm.coloringview.draws.image;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.seotm.coloringview.draws.DrawComponent;
@@ -15,7 +14,8 @@ import com.seotm.coloringview.draws.Position;
 public interface DrawImage extends DrawComponent {
 
     void setImage(@Nullable Drawable image);
-    void setImage(@NonNull Bitmap image);
+    void setImage(@Nullable Bitmap image);
+    void setStateImage(@Nullable Bitmap image);
 
     @Nullable
     Bitmap getImage();

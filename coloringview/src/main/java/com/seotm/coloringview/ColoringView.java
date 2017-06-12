@@ -3,7 +3,6 @@ package com.seotm.coloringview;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
@@ -40,6 +39,10 @@ public class ColoringView extends View {
     }
 
     public void setImage(@Nullable Drawable image) {
+        drawImage.setImage(image);
+    }
+
+    public void setImage(@Nullable Bitmap image) {
         drawImage.setImage(image);
     }
 
