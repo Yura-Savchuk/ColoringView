@@ -34,6 +34,7 @@ public class ColoringView extends View {
     public ColoringView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         drawImage = new DrawImageImpl();
+        new SetupResources(context, attrs, defStyleAttr).setup(this);
     }
 
     public void setImage(@Nullable Drawable image) {
