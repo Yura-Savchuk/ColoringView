@@ -13,7 +13,7 @@ import com.seotm.coloringview.draws.Position;
 
 public class DrawFloodFilter {
 
-    private static final int TOLERANCE = 200;
+    private static final int TOLERANCE = 100;
 
     private final Position position;
 
