@@ -70,6 +70,9 @@ public class DrawImageImpl implements DrawImage {
         if (imageX > bounds.width() || imageY > bounds.height()) {
             return Position.invalid();
         }
+        if (imageX < 0 || imageY < 0) {
+            return Position.invalid();
+        }
 
         return new  Position(imageX, imageY);
     }

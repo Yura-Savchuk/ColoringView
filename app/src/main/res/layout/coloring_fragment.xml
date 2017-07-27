@@ -10,6 +10,7 @@
         android:layout_height="0dp"
         app:imageSrc="@drawable/girls"
         app:paintColor="@color/colorPrimary"
+        app:enableColoringBlackColor="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"

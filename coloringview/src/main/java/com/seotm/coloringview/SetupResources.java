@@ -29,6 +29,7 @@ class SetupResources {
         TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.ColoringView, defStyleAttr, 0);
         setImage(view, array);
         setPaintColor(view, array);
+        setEnableColoringBlackColor(view, array);
         array.recycle();
     }
 
@@ -40,6 +41,10 @@ class SetupResources {
     private void setPaintColor(@NonNull ColoringView view, TypedArray array) {
         int defColor = ContextCompat.getColor(context, R.color.defaultPaintColor);
         view.paintColor = array.getColor(R.styleable.ColoringView_paintColor, defColor);
+    }
+
+    private void setEnableColoringBlackColor(@NonNull ColoringView view, TypedArray array) {
+        view.enableColoringBlackColor = array.getBoolean(R.styleable.ColoringView_enableColoringBlackColor, true);
     }
 
 }

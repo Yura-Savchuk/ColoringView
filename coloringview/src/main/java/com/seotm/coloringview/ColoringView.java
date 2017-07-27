@@ -23,6 +23,7 @@ public class ColoringView extends View {
 
     final DrawImage drawImage;
     int paintColor;
+    boolean enableColoringBlackColor;
 
     public ColoringView(Context context) {
         this(context, null);
@@ -80,7 +81,14 @@ public class ColoringView extends View {
             int y = (int) event.getY();
             Position bitmapPosition = drawImage.toBitmapPosition(x, y);
             Bitmap image = drawImage.getImage();
-            new DrawFloodFilter(bitmapPosition).draw(paintColor, image);
+
+            if (!new ColorValidation(enableColoringBlackColor)
+                    .isValidPosition(bitmapPosition, image)) {
+                return true;
+            }
+
+            new DrawFloodFilter(bitmapPosition)
+                    .draw(paintColor, image);
             invalidate();
         }
         return true;

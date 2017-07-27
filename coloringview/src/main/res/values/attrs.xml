@@ -4,6 +4,7 @@
     <declare-styleable name="ColoringView">
         <attr name="imageSrc" format="reference" />
         <attr name="paintColor" format="color" />
+        <attr name="enableColoringBlackColor" format="boolean"/>
     </declare-styleable>
 
 </resources>
