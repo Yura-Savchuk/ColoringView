@@ -41,10 +41,12 @@ public class ColoringView extends View {
 
     public void setImage(@Nullable Drawable image) {
         drawImage.setImage(image);
+        invalidate();
     }
 
     public void setImage(@Nullable Bitmap image) {
         drawImage.setImage(image);
+        invalidate();
     }
 
     public void setPaintColor(@ColorInt int paintColor) {
@@ -54,6 +56,7 @@ public class ColoringView extends View {
     public void setState(@Nullable ColoringState state) {
         if (state != null) {
             state.restoreState(this);
+            invalidate();
         }
     }
 
