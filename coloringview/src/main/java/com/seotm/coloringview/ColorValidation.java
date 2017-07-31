@@ -12,7 +12,7 @@ import com.seotm.coloringview.draws.Position;
 
 class ColorValidation {
 
-    private static final int MAX_BLACK_TONE_COLOR = -14500000;
+    private static final int MAX_BLACK_TONE_COLOR = 0x22;
 
     private final boolean enableColoringBlackColor;
 
@@ -28,7 +28,10 @@ class ColorValidation {
         if (enableColoringBlackColor) return true;
 
         int pixelColor = image.getPixel(position.x, position.y);
-        return pixelColor > MAX_BLACK_TONE_COLOR;
+        int r = (pixelColor >> 16) & 0xFF;
+        int g = (pixelColor >> 8) & 0xFF;
+        int b = (pixelColor) & 0xFF;
+        return r > MAX_BLACK_TONE_COLOR || g > MAX_BLACK_TONE_COLOR || b > MAX_BLACK_TONE_COLOR;
     }
 
 }
