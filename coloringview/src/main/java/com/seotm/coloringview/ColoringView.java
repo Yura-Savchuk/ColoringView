@@ -25,6 +25,8 @@ public class ColoringView extends View {
     int paintColor;
     boolean enableColoringBlackColor;
 
+    private OnFillColorListener fillColorListener;
+
     public ColoringView(Context context) {
         this(context, null);
     }
@@ -64,6 +66,10 @@ public class ColoringView extends View {
         return new ColoringState(this);
     }
 
+    public void setFillColorListener(OnFillColorListener listener) {
+        this.fillColorListener = listener;
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -93,6 +99,10 @@ public class ColoringView extends View {
             new DrawFloodFilter(bitmapPosition)
                     .draw(paintColor, image);
             invalidate();
+
+            if (fillColorListener != null) {
+                fillColorListener.onFillColor(paintColor);
+            }
         }
         return true;
     }
